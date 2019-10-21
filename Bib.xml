@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BibManagement>
+
+<Creator>
+	<Name>Leo</Name>
+	<Note>for the XML Class</Note>
+	<src repo="Github" src="https://github.com/discoleo/BibXML" />
+	<v>1</v>
+	<Date>
+		<Year>2019</Year>
+		<Month>10</Month>
+		<Day>14</Day>
+	</Date>
+</Creator>
+
+<Affiliations>
+	<Institutions>
+		<Institution idInst="1">
+			<!-- use ID vs IDInst vs Attr in Institution ? -->
+			<!--IDInst idInst="1" /-->
+			<Name>West University</Name>
+			<Type>University</Type>
+			<Adress>Journey to the West</Adress>
+		</Institution>
+		<Institution idInst="2">
+			<!--IDInst idInst="2" /-->
+			<Name>Solaris Station</Name>
+			<Type>Spacestation</Type>
+			<!-- Need Concept for non-stationary addresses -->
+			<Adress>rotationary orbit</Adress>
+		</Institution>
+	</Institutions>
+	
+	<!-- use ID vs IDAffil vs Attribute ? -->
+	<Affiliation idAffil="1">
+		<Institution idInstRef="1" />
+		<Department>Department of Informatics</Department>
+	</Affiliation>
+	<Affiliation idAffil="2">
+		<Institution idInstRef="2" />
+		<Department>Space Missions</Department>
+	</Affiliation>
+</Affiliations>
+
+<Authors>
+	<Author idAut="1">
+		<Name>Loop</Name>
+		<GivenName>And Garfunkel</GivenName>
+		<Affiliations>
+			<Affiliation idAffilRef="1" />
+			<Affiliation idAffilRef="2" />
+		</Affiliations>
+	</Author>
+	<Author idAut="2">
+		<Name>A</Name>
+		<GivenName>B C</GivenName>
+		<Affiliations>
+			<Affiliation idAffilRef="1" />
+		</Affiliations>
+	</Author>
+	<Author idAut="3">
+		<Name>Dreistein</Name>
+		<GivenName>MC3</GivenName>
+		<Affiliations>
+			<Affiliation idAffilRef="2" />
+		</Affiliations>
+	</Author>
+</Authors>
+
+<Journals>
+	<Journal idJ="1">
+		<Name>J. of Top Informatics</Name>
+		<Type>Journal</Type>
+		<ISSN IssnType="Electronic">1534-4436</ISSN>
+	</Journal>
+	<Journal idJ="2">
+		<Name>Interplanetary Conference of Informatics</Name>
+		<Type>Conference</Type>
+		<ISSN IssnType="Quantic">alfa-omega</ISSN>
+	</Journal>
+</Journals>
+
+<Articles>
+	<Article>
+		<Authors>
+			<Author idAutRef="1"><Hint>Loop To Loop</Hint></Author>
+			<Author idAutRef="2"><Hint>A B C</Hint></Author>
+		</Authors>
+		<Title>Loop me to the end of Love</Title>
+		<Date>
+			<Year>2019</Year>
+			<Month>10</Month>
+			<Day>14</Day>
+		</Date>
+		<AJournal>
+			<Journal idJRef="1" />
+			<LocationID EIdType="doi">00.0000/t.info.2019.10.001</LocationID>
+		</AJournal>
+	</Article>
+	<Article>
+		<Authors>
+			<Author idAutRef="1"><Hint>Loop To Loop</Hint></Author>
+			<Author idAutRef="2"><Hint>A B C</Hint></Author>
+		</Authors>
+		<Title>The Design of Powerful Bibliographic Systems</Title>
+		<Date>
+			<Year>2019</Year>
+			<Month>10</Month>
+			<Day>14</Day>
+		</Date>
+		<AJournal>
+			<Journal idJRef="2" />
+			<LocationID EIdType="doi">00.0000/t.info.2019.10.002</LocationID>
+		</AJournal>
+	</Article>
+</Articles>
+
+</BibManagement>
