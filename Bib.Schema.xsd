@@ -1,0 +1,201 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<xs:schema xmlns:xs = "http://www.w3.org/2001/XMLSchema">
+
+
+<!-- Creator -->
+<!-- Creator Type -->
+<xs:complexType name="creatorType">
+    <xs:sequence>
+		<xs:element name="Name" type="xs:string" fixed="Leo"/>
+		<xs:element name="Note" type="xs:string"/>
+		<xs:element name="src">
+			<xs:complexType>
+				<xs:attribute name = "repo" type = "xs:string" use="required" />
+				<xs:attribute name = "src" type = "xs:string" use="required" />
+			</xs:complexType>
+		</xs:element>
+		<xs:element name="v" type="xs:decimal"/>
+		<xs:element name="Date" type="dateType"/>
+	</xs:sequence>
+</xs:complexType>
+
+<!-- ====== -->
+
+<!-- Affiliations -->
+<!-- Institution -->
+<xs:complexType name="institutionType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="Type" type="xs:string"/>
+      <xs:element name="Adress" type="xs:string"/>
+    </xs:sequence>
+	<xs:attribute name = "idInst" type = "xs:integer" use="required" />
+</xs:complexType>
+
+<!-- Institutions Block -->
+<xs:complexType name="institutionBlockType">
+	<xs:sequence>
+		<xs:element name="Institution" type="institutionType" maxOccurs="unbounded" />
+	</xs:sequence>
+</xs:complexType>
+
+<!-- Affiliation Institution Ref -->
+<xs:complexType name="affiliationBaseType">
+	<xs:sequence>
+		<xs:element name="Institution" type="institutionRefType" />
+		<xs:element name="Department" type="xs:string" />
+	</xs:sequence>
+	<xs:attribute name = "idAffil" type = "xs:integer" use="required" />
+</xs:complexType>
+
+<!-- Institution Ref -->
+<xs:complexType name="institutionRefType">
+	<xs:attribute name = "idInstRef" type = "xs:integer" use="required" />
+</xs:complexType>
+
+<!-- ====== -->
+
+<!-- Authors -->
+<!-- Author -->
+<xs:complexType name="authorType">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string"/>
+      <xs:element name="GivenName" type="xs:string"/>
+      <xs:element name="Affiliations" type="affiliationRefType" maxOccurs="unbounded" />
+    </xs:sequence>
+	<xs:attribute name = "idAut" type = "xs:integer" use="required" />
+</xs:complexType>
+
+<!-- Affiliation Ref -->
+<xs:complexType name="affiliationRefType">
+	<xs:sequence>
+		<xs:element name="Affiliation" maxOccurs="unbounded">
+			<xs:complexType>
+				<xs:attribute name = "idAffilRef" type = "xs:integer" use="required" />
+			</xs:complexType>
+		</xs:element>
+	</xs:sequence>
+</xs:complexType>
+
+<!-- ====== -->
+
+<!-- Journals -->
+<!-- Journal Type -->
+<xs:complexType name="journalType">
+    <xs:sequence>
+		<xs:element name="Name" type="xs:string"/>
+		<xs:element name="Type" type="xs:string"/>
+		<xs:element name="ISSN" type="issnType"/>
+	</xs:sequence>
+	<xs:attribute name = "idJ" type = "xs:integer" use="required" />
+</xs:complexType>
+
+<!-- Publication Type -->
+<!-- ISSN Type -->
+<xs:complexType name="issnType">
+	<xs:simpleContent>
+		<xs:extension base="xs:string">
+			<xs:attribute name="IssnType" type="publicationType" default="Electronic" />
+		</xs:extension>
+	</xs:simpleContent>
+</xs:complexType>
+<xs:simpleType name="publicationType">
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="Electronic"/>
+		<xs:enumeration value="Print"/>
+		<xs:enumeration value="Quantic"/>
+	</xs:restriction>
+</xs:simpleType>
+
+<!-- ====== -->
+
+<!-- Articles -->
+<!-- Article Type -->
+<xs:complexType name="articleType">
+    <xs:sequence>
+		<xs:element name="Title" type="xs:string"/>
+		<xs:element name="Authors" type="xs:string"/>
+		<xs:element name="Date" type="dateType"/>
+		<xs:element name="AJournal" type="artJournalType"/>
+	</xs:sequence>
+</xs:complexType>
+<!-- ArtJournal Type -->
+<xs:complexType name="artJournalType">
+    <xs:sequence>
+		<xs:element name="Journal" type="journalRefType" />
+		<xs:element name="LocationID" type="uriType" />
+	</xs:sequence>
+</xs:complexType>
+<xs:complexType name="journalRefType">
+	<xs:attribute name="idJRef" type="xs:integer" />
+</xs:complexType>
+<!-- Location Type -->
+<xs:complexType name="uriType">
+	<xs:simpleContent>
+		<xs:extension base="xs:string">
+			<xs:attribute name="EIdType" type="uriAttribType" use="required" />
+		</xs:extension>
+	</xs:simpleContent>
+</xs:complexType>
+<!-- Location Enum -->
+<xs:simpleType name="uriAttribType">
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="doi"/>
+		<xs:enumeration value="Quantic Number"/>
+	</xs:restriction>
+</xs:simpleType>
+<!-- Date Type -->
+<xs:complexType name="dateType">
+    <xs:sequence>
+		<xs:element name="Year" type="xs:string"/>
+		<xs:element name="Month" type="xs:string"/>
+		<xs:element name="Day" type="xs:string"/>
+	</xs:sequence>
+</xs:complexType>
+
+<!-- ====== -->
+
+<!-- BIB -->
+<xs:element name = "BibManagement">
+	<xs:complexType>
+    <xs:sequence>
+		<!-- Creator -->
+		<xs:element name = "Creator" type="creatorType" />
+		<!-- Affiliations -->
+		<xs:element name = "Affiliations">
+			<xs:complexType>
+			<xs:sequence>
+				<xs:element name = "Institutions" type="institutionBlockType" />
+				<xs:element name = "Affiliation" type="affiliationBaseType" maxOccurs="unbounded" />
+			</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		<!-- Authors -->
+		<xs:element name = "Authors">
+			<xs:complexType>
+			<xs:sequence>
+				<xs:element name = "Author" type="authorType" maxOccurs="unbounded" />
+			</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		<!-- Journals -->
+		<xs:element name = "Journals">
+			<xs:complexType>
+			<xs:sequence>
+				<xs:element name = "Journal" type="journalType" maxOccurs="unbounded" />
+			</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		<!-- Articles -->
+		<xs:element name = "Articles">
+			<xs:complexType>
+			<xs:sequence>
+				<xs:element name = "Article" type="articleType" maxOccurs="unbounded" />
+			</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+    </xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+</xs:schema>
