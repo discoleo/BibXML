@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<BibManagement>
+<BibManagement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="C:\Users\Leo Mada\Desktop\Practica\MSc\XML\Bib.Schema.xsd">
 
 <Creator>
 	<Name>Leo</Name>
@@ -44,16 +45,16 @@
 
 <Authors>
 	<Author idAut="1">
-		<Name>Loop</Name>
-		<GivenName>And Garfunkel</GivenName>
+		<Name>Garfunkel</Name>
+		<GivenName>Loop And</GivenName>
 		<Affiliations>
 			<Affiliation idAffilRef="1" />
 			<Affiliation idAffilRef="2" />
 		</Affiliations>
 	</Author>
 	<Author idAut="2">
-		<Name>A</Name>
-		<GivenName>B C</GivenName>
+		<Name>C</Name>
+		<GivenName>A B</GivenName>
 		<Affiliations>
 			<Affiliation idAffilRef="1" />
 		</Affiliations>
@@ -82,36 +83,37 @@
 
 <Articles>
 	<Article>
+		<Title>Loop me to the end of Love</Title>
 		<Authors>
 			<Author idAutRef="1"><Hint>Loop To Loop</Hint></Author>
 			<Author idAutRef="2"><Hint>A B C</Hint></Author>
 		</Authors>
-		<Title>Loop me to the end of Love</Title>
 		<Date>
 			<Year>2019</Year>
 			<Month>10</Month>
 			<Day>14</Day>
 		</Date>
-		<AJournal>
+		<ArticleJournal>
 			<Journal idJRef="1" />
-			<LocationID EIdType="doi">00.0000/t.info.2019.10.001</LocationID>
-		</AJournal>
+			<LocationID EIdType="doi" v="1">00.0000/t.info.2019.10.001</LocationID>
+		</ArticleJournal>
 	</Article>
 	<Article>
+		<Title>The Design of Powerful Bibliographic Systems</Title>
 		<Authors>
 			<Author idAutRef="1"><Hint>Loop To Loop</Hint></Author>
 			<Author idAutRef="2"><Hint>A B C</Hint></Author>
+			<Author idAutRef="3"><Hint>MC3</Hint></Author>
 		</Authors>
-		<Title>The Design of Powerful Bibliographic Systems</Title>
 		<Date>
 			<Year>2019</Year>
 			<Month>10</Month>
 			<Day>14</Day>
 		</Date>
-		<AJournal>
+		<ArticleJournal>
 			<Journal idJRef="2" />
-			<LocationID EIdType="doi">00.0000/t.info.2019.10.002</LocationID>
-		</AJournal>
+			<LocationID EIdType="doi" v="1">00.0000/t.info.2019.10.002</LocationID>
+		</ArticleJournal>
 	</Article>
 </Articles>
 

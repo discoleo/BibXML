@@ -114,16 +114,16 @@
 <xs:complexType name="articleType">
     <xs:sequence>
 		<xs:element name="Title" type="xs:string"/>
-		<xs:element name="Authors" type="xs:string"/>
+		<xs:element name="Authors" type="authorsRefType"/>
 		<xs:element name="Date" type="dateType"/>
-		<xs:element name="AJournal" type="artJournalType"/>
+		<xs:element name="ArticleJournal" type="artJournalType"/>
 	</xs:sequence>
 </xs:complexType>
 <!-- ArtJournal Type -->
 <xs:complexType name="artJournalType">
     <xs:sequence>
 		<xs:element name="Journal" type="journalRefType" />
-		<xs:element name="LocationID" type="uriType" />
+		<xs:element name="LocationID" type="uriType" maxOccurs="5" />
 	</xs:sequence>
 </xs:complexType>
 <xs:complexType name="journalRefType">
@@ -134,6 +134,7 @@
 	<xs:simpleContent>
 		<xs:extension base="xs:string">
 			<xs:attribute name="EIdType" type="uriAttribType" use="required" />
+			<xs:attribute name="v" type="xs:decimal" default="1" />
 		</xs:extension>
 	</xs:simpleContent>
 </xs:complexType>
@@ -150,6 +151,20 @@
 		<xs:element name="Year" type="xs:string"/>
 		<xs:element name="Month" type="xs:string"/>
 		<xs:element name="Day" type="xs:string"/>
+	</xs:sequence>
+</xs:complexType>
+
+<!-- Authors Ref -->
+<xs:complexType name="authorsRefType">
+	<xs:sequence>
+		<xs:element name="Author" maxOccurs="unbounded">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="Hint" type="xs:string" minOccurs="0" />
+				</xs:sequence>
+				<xs:attribute name="idAutRef" type="xs:integer" use="required" />
+			</xs:complexType>
+		</xs:element>
 	</xs:sequence>
 </xs:complexType>
 
