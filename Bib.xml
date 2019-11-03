@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BibManagement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:noNamespaceSchemaLocation="C:\Users\Leo Mada\Desktop\Practica\MSc\XML\Bib.Schema.xsd">
+	xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/discoleo/BibXML/master/Bib.Schema.xsd">
 
 <Creator>
 	<Name>Leo</Name>
