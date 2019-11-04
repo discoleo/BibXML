@@ -6,6 +6,7 @@ public class ArticleObj {
 	public String sTitle = null;
 	protected final Vector<AuthorObj> vAuthors = new Vector<> ();
 	public String sJournal = null;
+	public int iYear = 0;
 	
 	// TODO: Date
 	
@@ -17,6 +18,9 @@ public class ArticleObj {
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("Title: ").append(sTitle).append('\n');
+		if(iYear > 0) {
+			sb.append("[").append(iYear).append("]\n");
+		}
 		
 		int countA = 1;
 		for(final AuthorObj author : vAuthors) {

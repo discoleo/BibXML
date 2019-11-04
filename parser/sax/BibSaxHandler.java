@@ -1,5 +1,7 @@
 package sax;
 
+import java.util.Vector;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -10,8 +12,18 @@ public class BibSaxHandler extends DefaultHandler {
 	private BIB_NODES node = BIB_NODES.ROOT;
 	
 	private final AuthorsDict dictAuthors = new AuthorsDict();
+	private final Vector<ArticleObj> vArticles = new Vector<> ();
 	
 	private ArticleObj article = null;
+	
+	// ++++++ MEMBER FUNCTIONS ++++++
+	
+	public Vector<ArticleObj> GetArticles() {
+		return vArticles;
+	}
+	public void Clear() {
+		vArticles.clear(); // may have undesired effects
+	}
 
 	@Override
 	public void startElement(final String uri,
@@ -58,11 +70,8 @@ public class BibSaxHandler extends DefaultHandler {
 				break;}
 			// +++ Articles
 			case ARTICLE : {
-				if(article != null) {
-					System.out.println(article.toString());
-					System.out.println("\n");
-				}
 				article = new ArticleObj();
+				vArticles.add(article);
 				break; }
 			case ARTICLE_AUTHOR : {
 				final String sRef = attributes.getValue("idAutRef");
@@ -85,10 +94,6 @@ public class BibSaxHandler extends DefaultHandler {
 		// quick hack
 		if(node.IsNode(qName)) {
 			if(node.equals(BIB_NODES.ARTICLE)) {
-				if(article != null) {
-					System.out.println(article.toString());
-					System.out.println("\n");
-				}
 				article = null;
 			}
 			
@@ -128,6 +133,9 @@ public class BibSaxHandler extends DefaultHandler {
 			// +++ Title
 			case TITLE : {
 				article.sTitle = sVal;
+				break; }
+			case DATE_YEAR : {
+				article.iYear = Integer.parseInt(sVal);
 				break; }
 			}
 			

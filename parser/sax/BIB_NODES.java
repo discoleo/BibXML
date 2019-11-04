@@ -32,6 +32,8 @@ public enum BIB_NODES {
 		TITLE("Title", true, ARTICLE),
 		ARTICLE_JOURNAL("ArticleJournal", false, ARTICLE),
 		ARTICLE_JOURNAL_J("Journal", false, ARTICLE_JOURNAL),
+		DATE("Date", false, ARTICLE),
+		DATE_YEAR("Year", true, DATE),
 	
 	;
 
