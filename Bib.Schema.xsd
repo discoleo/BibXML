@@ -118,6 +118,7 @@
 		<xs:element name="Date" type="dateType"/>
 		<xs:element name="ArticleJournal" type="artJournalType"/>
 	</xs:sequence>
+	<xs:attribute name="idArticle" type="xs:integer" use="required" />
 </xs:complexType>
 <!-- ArtJournal Type -->
 <xs:complexType name="artJournalType">
@@ -148,9 +149,9 @@
 <!-- Date Type -->
 <xs:complexType name="dateType">
     <xs:sequence>
-		<xs:element name="Year" type="xs:string"/>
-		<xs:element name="Month" type="xs:string"/>
-		<xs:element name="Day" type="xs:string"/>
+		<xs:element name="Year" type="xs:gYear" />
+		<xs:element name="Month" type="xs:string" />
+		<xs:element name="Day" type="xs:string" />
 	</xs:sequence>
 </xs:complexType>
 
@@ -184,6 +185,10 @@
 				<xs:element name = "Affiliation" type="affiliationBaseType" maxOccurs="unbounded" />
 			</xs:sequence>
 			</xs:complexType>
+			<xs:unique name="uniqueInstitution">
+				<xs:selector xpath="./Institutions/*"/>
+				<xs:field xpath="@idInst"/>
+			</xs:unique>
 		</xs:element>
 		<!-- Authors -->
 		<xs:element name = "Authors">
@@ -192,6 +197,10 @@
 				<xs:element name = "Author" type="authorType" maxOccurs="unbounded" />
 			</xs:sequence>
 			</xs:complexType>
+			<xs:unique name="uniqueAuthor">
+				<xs:selector xpath="./*"/>
+				<xs:field xpath="@idAut"/>
+			</xs:unique>
 		</xs:element>
 		<!-- Journals -->
 		<xs:element name = "Journals">
@@ -200,6 +209,10 @@
 				<xs:element name = "Journal" type="journalType" maxOccurs="unbounded" />
 			</xs:sequence>
 			</xs:complexType>
+			<xs:unique name="uniqueJournal">
+				<xs:selector xpath="./*"/>
+				<xs:field xpath="@idJ"/>
+			</xs:unique>
 		</xs:element>
 		<!-- Articles -->
 		<xs:element name = "Articles">
