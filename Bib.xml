@@ -14,17 +14,17 @@
 	</Date>
 </Creator>
 
+<!-- ALL Affiliations -->
 <Affiliations>
 	<Institutions>
 		<Institution idInst="1">
-			<!-- use ID vs IDInst vs Attr in Institution ? -->
+			<!-- use ID as Evalue vs IDInst vs Attr in Institution ? -->
 			<!--IDInst idInst="1" /-->
 			<Name>West University</Name>
 			<Type>University</Type>
 			<Adress>Journey to the West</Adress>
 		</Institution>
 		<Institution idInst="2">
-			<!--IDInst idInst="2" /-->
 			<Name>Solaris Station</Name>
 			<Type>Spacestation</Type>
 			<!-- Need Concept for non-stationary addresses -->
@@ -32,7 +32,7 @@
 		</Institution>
 	</Institutions>
 	
-	<!-- use ID vs IDAffil vs Attribute ? -->
+	<!-- Specific Departments -->
 	<Affiliation idAffil="1">
 		<Institution idInstRef="1" />
 		<Department>Department of Informatics</Department>
@@ -41,8 +41,13 @@
 		<Institution idInstRef="2" />
 		<Department>Space Missions</Department>
 	</Affiliation>
+	<Affiliation idAffil="3">
+		<Institution idInstRef="2" />
+		<Department>Department of Unusual Physics</Department>
+	</Affiliation>
 </Affiliations>
 
+<!-- Authors: ALL Details -->
 <Authors>
 	<Author idAut="1">
 		<Name>Garfunkel</Name>
@@ -64,10 +69,20 @@
 		<GivenName>MC3</GivenName>
 		<Affiliations>
 			<Affiliation idAffilRef="2" />
+			<Affiliation idAffilRef="3" />
+		</Affiliations>
+	</Author>
+	<Author idAut="4">
+		<Name>Longus</Name>
+		<GivenName>Stringus</GivenName>
+		<Affiliations>
+			<Affiliation idAffilRef="2" />
+			<Affiliation idAffilRef="3" />
 		</Affiliations>
 	</Author>
 </Authors>
 
+<!-- List of Journals -->
 <Journals>
 	<Journal idJ="1">
 		<Name>J. of Top Informatics</Name>
@@ -81,8 +96,9 @@
 	</Journal>
 </Journals>
 
+<!-- List of Articles -->
 <Articles>
-	<Article>
+	<Article idArticle="1">
 		<Title>Loop me to the end of Love</Title>
 		<Authors>
 			<Author idAutRef="1"><Hint>Loop To Loop</Hint></Author>
@@ -98,11 +114,26 @@
 			<LocationID EIdType="doi" v="1">00.0000/t.info.2019.10.001</LocationID>
 		</ArticleJournal>
 	</Article>
-	<Article>
+	<Article idArticle="2">
 		<Title>The Design of Powerful Bibliographic Systems</Title>
 		<Authors>
 			<Author idAutRef="1"><Hint>Loop To Loop</Hint></Author>
 			<Author idAutRef="2"><Hint>A B C</Hint></Author>
+			<Author idAutRef="3"><Hint>MC3</Hint></Author>
+		</Authors>
+		<Date>
+			<Year>2019</Year>
+			<Month>10</Month>
+			<Day>14</Day>
+		</Date>
+		<ArticleJournal>
+			<Journal idJRef="2" />
+			<LocationID EIdType="doi" v="1">00.0000/t.info.2019.10.002</LocationID>
+		</ArticleJournal>
+	</Article>
+	<Article idArticle="3">
+		<Title>New Developments in Science</Title>
+		<Authors>
 			<Author idAutRef="3"><Hint>MC3</Hint></Author>
 		</Authors>
 		<Date>
