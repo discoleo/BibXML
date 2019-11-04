@@ -12,6 +12,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import sax.ArticleObj;
 import sax.BibSaxHandler;
 
 
@@ -34,7 +35,10 @@ public class MainGui {
 			final XMLReader reader = this.GetXMLSaxReader(handler);
 			if(reader != null) {
 				reader.parse(inSrc);
-				// TODO: get parsed content
+				for(final ArticleObj article : handler.GetArticles()) {
+					System.out.println(article.toString());
+					System.out.println("\n");
+				}
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
