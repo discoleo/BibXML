@@ -14,15 +14,26 @@ import org.xml.sax.XMLReader;
 
 import sax.ArticleObj;
 import sax.BibSaxHandler;
+import valid.XmlValidator;
 
 
 public class MainGui {
 	
 	private final String sPath = "C:\\Users\\Leo Mada\\Desktop\\Practica\\MSc\\XML\\";
-	private final String sFile = "Bib.xml";
+	private final String sXmlFile = "Bib.xml";
+	private final String sSchemaFile = "Bib.Schema.xsd";
 	
+	// +++ IO +++
+	public File GetFile() {
+		return new File(sPath + sXmlFile);
+	}
+	public File GetSchema() {
+		return new File(sPath + sSchemaFile);
+	}
+	
+	// +++ Parse XML +++
 	public void Process() {
-		this.Process(sPath + sFile);
+		this.Process(this.GetFile());
 	}
 	public void Process(final String sFile) {
 		this.Process(new File(sFile));
@@ -66,12 +77,27 @@ public class MainGui {
 		}
 	}
 	
+	// +++ Validate XML +++
+	public boolean Validate() {
+		return this.Validate(this.GetFile(), this.GetSchema());
+	}
+	public boolean Validate(final File fileXML, final File fileSchema) {
+		final XmlValidator validator = new XmlValidator();
+		return validator.Validate(fileXML, fileSchema);
+	}
+	
 	// ++++++++++ MAIN +++++++++
 
 	public static void main(String[] args) {
 		final MainGui gui = new MainGui();
 		
 		gui.Process();
+		
+		if(gui.Validate()) {
+			System.out.println("Xml was validated");
+		} else {
+			System.out.println("Xml was NOT validated!");
+		}
 	}
 
 }
