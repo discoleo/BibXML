@@ -84,26 +84,38 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			
 			<xsl:for-each select="./Affiliations/Affiliation">
 				<xsl:variable name="idAffil" select="@idAffilRef"/>
-				<xsl:variable name="varAffil" select="//BibManagement/Affiliations/Affiliation[@idAffil=$idAffil]"/>
-				<xsl:variable name="idInst" select="//BibManagement/Affiliations/Affiliation[@idAffil=$idAffil]/Institution/@idInstRef"/>
-				<xsl:variable name="varInst" select="//BibManagement/Affiliations/Institutions/Institution[@idInst=$idInst]"/>
-			
-			<tr>
-				<td><xsl:value-of select="$idAut" /></td>
-				<td><xsl:value-of select="$nameAut" /></td>
-				<td><xsl:value-of select="$gvNameAut" /></td>
-				<td><xsl:value-of select="$varAffil/Department" /></td>
-				<td><xsl:value-of select="$varInst/Name" /></td>
-				<td><xsl:value-of select="$varInst/Type" /></td>
-			</tr>
+				
+				<xsl:call-template name="templAuthor">
+					<xsl:with-param name="idAffil" select="$idAffil"/>
+					<xsl:with-param name="idAut" select="$idAut"/>
+					<xsl:with-param name="nameAut" select="$nameAut"/>
+					<xsl:with-param name="gvNameAut" select="$gvNameAut"/>
+				</xsl:call-template>
 			</xsl:for-each>
 			
 		</xsl:for-each>
 	</table>
 </xsl:template>
 
-<xsl:template name="Author">
-	<xsl:param name="nodeAuthor"/>
+<xsl:template name="templAuthor">
+	<xsl:param name="idAffil"/>
+	<!-- Author -->
+	<xsl:param name="idAut"/>
+	<xsl:param name="nameAut"/>
+	<xsl:param name="gvNameAut"/>
+	
+	<xsl:variable name="varAffil" select="//BibManagement/Affiliations/Affiliation[@idAffil=$idAffil]"/>
+	<xsl:variable name="idInst" select="//BibManagement/Affiliations/Affiliation[@idAffil=$idAffil]/Institution/@idInstRef"/>
+	<xsl:variable name="varInst" select="//BibManagement/Affiliations/Institutions/Institution[@idInst=$idInst]"/>
+			
+		<tr>
+			<td><xsl:value-of select="$idAut" /></td>
+			<td><xsl:value-of select="$nameAut" /></td>
+			<td><xsl:value-of select="$gvNameAut" /></td>
+			<td><xsl:value-of select="$varAffil/Department" /></td>
+			<td><xsl:value-of select="$varInst/Name" /></td>
+			<td><xsl:value-of select="$varInst/Type" /></td>
+		</tr>
 </xsl:template>
 
 </xsl:stylesheet>
