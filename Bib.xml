@@ -6,11 +6,11 @@
 	<Name>Leo</Name>
 	<Note>for the XML Class</Note>
 	<src repo="Github" src="https://github.com/discoleo/BibXML" />
-	<v>1</v>
+	<v>1.1</v>
 	<Date>
 		<Year>2019</Year>
-		<Month>10</Month>
-		<Day>14</Day>
+		<Month>11</Month>
+		<Day>4</Day>
 	</Date>
 </Creator>
 
@@ -143,7 +143,7 @@
 		</Date>
 		<ArticleJournal>
 			<Journal idJRef="2" />
-			<LocationID EIdType="doi" v="1">00.0000/t.info.2019.10.002</LocationID>
+			<LocationID EIdType="doi" v="1">00.0000/t.info.2019.11.003</LocationID>
 		</ArticleJournal>
 	</Article>
 </Articles>

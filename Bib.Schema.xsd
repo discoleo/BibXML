@@ -189,6 +189,10 @@
 				<xs:selector xpath="./Institutions/*"/>
 				<xs:field xpath="@idInst"/>
 			</xs:unique>
+			<xs:unique name="uniqueAffiliation">
+				<xs:selector xpath="./Affiliation"/>
+				<xs:field xpath="@idAffil"/>
+			</xs:unique>
 		</xs:element>
 		<!-- Authors -->
 		<xs:element name = "Authors">
