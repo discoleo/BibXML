@@ -6,6 +6,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import data.ArticleObj;
+import data.AuthorsDict;
+import data.JournalObj;
+
 
 public class BibSaxHandler extends DefaultHandler {
 	
@@ -81,8 +85,8 @@ public class BibSaxHandler extends DefaultHandler {
 				break; }
 			case ARTICLE_JOURNAL_J : {
 				final String sRef = attributes.getValue("idJRef");
-				final String sJ = dictAuthors.GetJournal(Integer.parseInt(sRef));
-				article.sJournal = sJ;
+				final JournalObj journal = dictAuthors.GetJournal(Integer.parseInt(sRef));
+				article.journal = journal;
 				break; }
 			}
 		}
@@ -128,6 +132,12 @@ public class BibSaxHandler extends DefaultHandler {
 			// +++ Journals
 			case JOURNAL_NAME : {
 				dictAuthors.BuildJournal(sVal);
+				break; }
+			case JOURNAL_TYPE : {
+				dictAuthors.BuildJournalType(sVal);
+				break; }
+			case JOURNAL_ISSN : {
+				dictAuthors.BuildJournalIssn(sVal);
 				break; }
 			
 			// +++ Title
