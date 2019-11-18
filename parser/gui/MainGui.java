@@ -12,7 +12,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import sax.ArticleObj;
+import data.ArticleObj;
+import dom.Parser;
 import sax.BibSaxHandler;
 import valid.XmlValidator;
 
@@ -77,6 +78,15 @@ public class MainGui {
 		}
 	}
 	
+	// +++ Parse DOM +++
+	public void ParseDom() {
+		this.ParseDom(this.GetFile());
+	}
+	public void ParseDom(final File file) {
+		final Parser parserDom = new Parser();
+		parserDom.Parse(file);
+	}
+	
 	// +++ Validate XML +++
 	public boolean Validate() {
 		return this.Validate(this.GetFile(), this.GetSchema());
@@ -91,6 +101,7 @@ public class MainGui {
 	public static void main(String[] args) {
 		final MainGui gui = new MainGui();
 		
+		// SAX Parser
 		gui.Process();
 		
 		if(gui.Validate()) {
@@ -98,6 +109,9 @@ public class MainGui {
 		} else {
 			System.out.println("Xml was NOT validated!");
 		}
+		
+		// DOM Parser
+		gui.ParseDom();
 	}
 
 }
