@@ -1,7 +1,11 @@
 
+
+[v 2019-11-18]
+- basic DOM parser: based on DOM4J, using XPath;
+- code refactoring;
+
 [v 2019-11-17]
 - xml validation;
-
 
 [v 2019-11-04]
 - updated to parse xml with the new schema;
@@ -10,4 +14,5 @@
 
 TODO:
 [open tasks]
-- implement DOM parser;
+- DOM parser: extract also articles;
+- AuthorObj: store affiliations using Vector<AffiliationObj>;
