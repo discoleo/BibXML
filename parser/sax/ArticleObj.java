@@ -25,7 +25,9 @@ public class ArticleObj {
 		int countA = 1;
 		for(final AuthorObj author : vAuthors) {
 			sb.append("Author ").append(countA++).append(": ");
-			sb.append(author.toString());
+			if(author != null) {
+				sb.append(author.toString());
+			}
 		}
 		sb.append("Journal: ").append(sJournal);
 		
