@@ -17,5 +17,4 @@
 
 TODO:
 [open tasks]
-- DOM parser: extract also articles;
 - AuthorObj: store affiliations using Vector<AffiliationObj>;
