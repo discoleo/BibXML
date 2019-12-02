@@ -1,4 +1,7 @@
 
+[v 2019-12-02]
+- basic DOM parser: extract Articles;
+- renaming some xml attributes;
 
 [v 2019-11-18]
 - basic DOM parser: based on DOM4J, using XPath;
