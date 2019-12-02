@@ -7,6 +7,15 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:template match="/">
 	<html>
 	<style>
+		tr.inst{
+			background-color: #9acd32;
+		}
+		tr.h{
+			background-color: #288AD0;
+		}
+		tr.h2{
+			background-color: #28C0D0;
+		}
 		td.name{
 			color: blue;
 			font-weight: bold;
@@ -44,6 +53,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<!-- Authors by Institutions -->
 	<xsl:call-template name="AuthorsByAffil" />
 	
+	<p></p>
 	</body>
 	</html>
 </xsl:template>
@@ -53,7 +63,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <!-- Only Institutions, without Departments -->
 <xsl:template match="//BibManagement/Affiliations/Institutions">
 	<table border="1">
-		<tr bgcolor="#9acd32">
+		<tr class="inst">
 			<th>ID</th>
 			<th>Institution</th>
 			<th>Type</th>
@@ -74,7 +84,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <!-- Institutions &amp; Departments -->
 <xsl:template match="/BibManagement/Affiliations">
 	<table border="1">
-		<tr bgcolor="#9acd32">
+		<tr class="inst">
 			<th>ID</th>
 			<th>Dept</th>
 			<th>Institution</th>
@@ -104,17 +114,17 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <!-- Authors: by Affiliation -->
 <xsl:template name="AuthorsByAffil">
 	<table border="1">
-		<tr bgcolor="#288AD0">
-		<!-- <tr bgcolor="#9acd32"> -->
+		<tr class="h">
 			<th>ID</th>
 			<th>Institution</th>
 			<th>Dept</th>
 			<th>Type</th>
-		</tr><tr bgcolor="#288AD0">
+		</tr><tr class="h2">
 			<!-- Authors -->
 			<th>ID Author</th>
 			<th>Author</th>
 			<th>Given Name</th>
+			<th>Articles</th>
 		</tr>
 		
 		<xsl:for-each select="/BibManagement/Affiliations/Institutions/Institution">
@@ -143,15 +153,21 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:param name="idAffil"/>
 	<xsl:param name="idInst"/>
 	<xsl:for-each select="/BibManagement/Authors/Author[./Affiliations/Affiliation/@idAffilRef = $idAffil]">
-			<xsl:variable name="idAut" select="@idAut"/>
+			<xsl:variable name="idAuthor" select="@idAuthor"/>
 			<xsl:variable name="nameAut" select="Name"/>
 			<xsl:variable name="gvNameAut" select="GivenName"/>
 				
 				<tr>
 					<!-- <td></td><td></td><td></td><td></td> -->
-					<td><xsl:value-of select="concat($idInst, '.', $idAut)"/></td>
+					<td><xsl:value-of select="concat($idInst, '.', $idAuthor)"/></td>
 					<td><xsl:value-of select="$nameAut"/></td>
 					<td><xsl:value-of select="$gvNameAut"/></td>
+					<!-- Articles -->
+					<td>
+						<xsl:call-template name="templArticlesByAuthor">
+							<xsl:with-param name="idAuthor" select="$idAuthor"/>
+						</xsl:call-template>
+					</td>
 				</tr>
 			
 		</xsl:for-each>
@@ -161,12 +177,12 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <!-- Authors by Author: ALL Affiliations -->
 <xsl:template match="/BibManagement/Authors">
 	<table border="1">
-		<tr bgcolor="#288AD0">
-		<!-- bgcolor="#9acd32" -->
+		<tr class="h">
 			<th>ID</th>
 			<th>Author</th>
 			<th>Given Name</th>
 			<th>Dept / Institution</th>
+			<th>Articles</th>
 		</tr>
 		
 		<xsl:apply-templates select="./Author" />
@@ -175,24 +191,31 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <!-- Author's Details -->
 <xsl:template match="/BibManagement/Authors/Author">
-	<xsl:variable name="idAut" select="@idAut"/>
+	<xsl:variable name="idAuthor" select="@idAuthor"/>
 	<xsl:variable name="nameAut" select="./Name"/>
 	<xsl:variable name="gvNameAut" select="./GivenName"/>
 			
 	<tr>
 		<!-- Author -->
-		<td><xsl:value-of select="$idAut" /></td>
+		<td><xsl:value-of select="$idAuthor" /></td>
 		<td class="name"><xsl:value-of select="$nameAut" /></td>
 		<td><xsl:value-of select="$gvNameAut" /></td>
 		<td>
 			<xsl:for-each select="./Affiliations/Affiliation">
 				<xsl:variable name="idAffil" select="@idAffilRef"/>
 				
+				<!-- Affiliations -->
 				<xsl:call-template name="templAffiliationsOfAuthor">
 					<xsl:with-param name="id" select="position()"/>
 					<xsl:with-param name="idAffil" select="$idAffil"/>
 				</xsl:call-template>
 			</xsl:for-each>
+		</td>
+		<td>
+			<!-- Articles -->
+			<xsl:call-template name="templArticlesByAuthor">
+				<xsl:with-param name="idAuthor" select="$idAuthor"/>
+			</xsl:call-template>
 		</td>
 	</tr>
 </xsl:template>
@@ -209,6 +232,19 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		<p><span class="title"><xsl:value-of select="concat($id, '.) ', $varAffil/Department)" /></span>
 		<br/><xsl:value-of select="$varInst/Name" />
 		<br/><xsl:value-of select="$varInst/Type" /></p>
+</xsl:template>
+
+<xsl:template name="templArticlesByAuthor">
+	<xsl:param name="idAuthor"/>
+	
+	<xsl:variable name="varArticle" select="/BibManagement/Articles/Article[./Authors/Author/@idAuthorRef=$idAuthor]"/>
+	<p>
+		<xsl:for-each select="$varArticle">
+			<xsl:value-of select="position()" />.) 
+			<xsl:value-of select="Title" />
+			<br/>
+		</xsl:for-each>
+	</p>
 </xsl:template>
 
 </xsl:stylesheet>

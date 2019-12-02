@@ -63,7 +63,7 @@
       <xs:element name="GivenName" type="xs:string"/>
       <xs:element name="Affiliations" type="affiliationRefType" maxOccurs="unbounded" />
     </xs:sequence>
-	<xs:attribute name = "idAut" type = "xs:integer" use="required" />
+	<xs:attribute name = "idAuthor" type = "xs:integer" use="required" />
 </xs:complexType>
 
 <!-- Affiliation Ref -->
@@ -163,7 +163,7 @@
 				<xs:sequence>
 					<xs:element name="Hint" type="xs:string" minOccurs="0" />
 				</xs:sequence>
-				<xs:attribute name="idAutRef" type="xs:integer" use="required" />
+				<xs:attribute name="idAuthorRef" type="xs:integer" use="required" />
 			</xs:complexType>
 		</xs:element>
 	</xs:sequence>
@@ -203,7 +203,7 @@
 			</xs:complexType>
 			<xs:unique name="uniqueAuthor">
 				<xs:selector xpath="./*"/>
-				<xs:field xpath="@idAut"/>
+				<xs:field xpath="@idAuthor"/>
 			</xs:unique>
 		</xs:element>
 		<!-- Journals -->
