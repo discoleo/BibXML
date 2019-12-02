@@ -43,7 +43,7 @@ public class BibSaxHandler extends DefaultHandler {
 				break; }
 			// +++ Author
 			case AUTHOR: {
-				final String sRef = attributes.getValue("idAut");
+				final String sRef = attributes.getValue("idAuthor");
 				dictAuthors.SetID(Integer.parseInt(sRef));
 				// System.out.println("Institute: " + sRef);
 				break; }
@@ -78,7 +78,7 @@ public class BibSaxHandler extends DefaultHandler {
 				vArticles.add(article);
 				break; }
 			case ARTICLE_AUTHOR : {
-				final String sRef = attributes.getValue("idAutRef");
+				final String sRef = attributes.getValue("idAuthorRef");
 				final int id = Integer.parseInt(sRef);
 				article.AddAuthor(dictAuthors.get(id));
 				// System.out.println("Author: " + dictAuthors.get(id).toString());
