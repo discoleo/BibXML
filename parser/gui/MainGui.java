@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -20,6 +21,8 @@ import valid.XmlValidator;
 
 public class MainGui {
 	
+	// ++++++++++ version 2.1 +++++++++
+	
 	private final String sPath = "C:\\Users\\Leo Mada\\Desktop\\Practica\\MSc\\XML\\";
 	private final String sXmlFile = "Bib.xml";
 	private final String sSchemaFile = "Bib.Schema.xsd";
@@ -30,6 +33,14 @@ public class MainGui {
 	}
 	public File GetSchema() {
 		return new File(sPath + sSchemaFile);
+	}
+	
+	// Print Articles
+	public void Print(final Vector<ArticleObj> vArticles) {
+		for(final ArticleObj article : vArticles) {
+			System.out.println(article.toString());
+			System.out.println("\n");
+		}
 	}
 	
 	// +++ Parse XML +++
@@ -47,10 +58,7 @@ public class MainGui {
 			final XMLReader reader = this.GetXMLSaxReader(handler);
 			if(reader != null) {
 				reader.parse(inSrc);
-				for(final ArticleObj article : handler.GetArticles()) {
-					System.out.println(article.toString());
-					System.out.println("\n");
-				}
+				this.Print(handler.GetArticles());
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -85,6 +93,7 @@ public class MainGui {
 	public void ParseDom(final File file) {
 		final Parser parserDom = new Parser();
 		parserDom.Parse(file);
+		this.Print(parserDom.GetArticles());
 	}
 	
 	// +++ Validate XML +++
