@@ -8,9 +8,9 @@ public class ArticleObj {
 	public JournalObj journal = null;
 	public int iYear = 0;
 	
-	// TODO: Date
+	// TODO: full Date
 	
-	public void AddAuthor(AuthorObj author) {
+	public void AddAuthor(final AuthorObj author) {
 		vAuthors.add(author);
 	}
 	
