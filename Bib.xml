@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <BibManagement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/discoleo/BibXML/master/Bib.Schema.xsd">
 
@@ -49,7 +49,7 @@
 
 <!-- Authors: ALL Details -->
 <Authors>
-	<Author idAut="1">
+	<Author idAuthor="1">
 		<Name>Garfunkel</Name>
 		<GivenName>Loop And</GivenName>
 		<Affiliations>
@@ -57,14 +57,14 @@
 			<Affiliation idAffilRef="2" />
 		</Affiliations>
 	</Author>
-	<Author idAut="2">
+	<Author idAuthor="2">
 		<Name>C</Name>
 		<GivenName>A B</GivenName>
 		<Affiliations>
 			<Affiliation idAffilRef="1" />
 		</Affiliations>
 	</Author>
-	<Author idAut="3">
+	<Author idAuthor="3">
 		<Name>Dreistein</Name>
 		<GivenName>MC3</GivenName>
 		<Affiliations>
@@ -72,7 +72,7 @@
 			<Affiliation idAffilRef="3" />
 		</Affiliations>
 	</Author>
-	<Author idAut="4">
+	<Author idAuthor="4">
 		<Name>Longus</Name>
 		<GivenName>Stringus</GivenName>
 		<Affiliations>
@@ -101,8 +101,7 @@
 	<Article idArticle="1">
 		<Title>Loop me to the end of Love</Title>
 		<Authors>
-			<Author idAutRef="1"><Hint>Loop To Loop</Hint></Author>
-			<Author idAutRef="2"><Hint>A B C</Hint></Author>
+			<Author idAuthorRef="1"><Hint>Loop To Loop</Hint></Author>
 		</Authors>
 		<Date>
 			<Year>2019</Year>
@@ -117,9 +116,9 @@
 	<Article idArticle="2">
 		<Title>The Design of Powerful Bibliographic Systems</Title>
 		<Authors>
-			<Author idAutRef="1"><Hint>Loop To Loop</Hint></Author>
-			<Author idAutRef="2"><Hint>A B C</Hint></Author>
-			<Author idAutRef="3"><Hint>MC3</Hint></Author>
+			<Author idAuthorRef="1"><Hint>Loop To Loop</Hint></Author>
+			<Author idAuthorRef="2"><Hint>A B C</Hint></Author>
+			<Author idAuthorRef="3"><Hint>MC3</Hint></Author>
 		</Authors>
 		<Date>
 			<Year>2019</Year>
@@ -134,12 +133,28 @@
 	<Article idArticle="3">
 		<Title>New Developments in Science</Title>
 		<Authors>
-			<Author idAutRef="3"><Hint>MC3</Hint></Author>
+			<Author idAuthorRef="3"><Hint>MC3</Hint></Author>
 		</Authors>
 		<Date>
 			<Year>2019</Year>
 			<Month>10</Month>
 			<Day>14</Day>
+		</Date>
+		<ArticleJournal>
+			<Journal idJRef="2" />
+			<LocationID EIdType="doi" v="1">00.0000/t.info.2019.11.003</LocationID>
+		</ArticleJournal>
+	</Article>
+	<Article idArticle="4">
+		<Title>The Fundamentals of Letter Theory</Title>
+		<Authors>
+			<Author idAuthorRef="2"><Hint>ABC</Hint></Author>
+			<Author idAuthorRef="4"><Hint>Stringus</Hint></Author>
+		</Authors>
+		<Date>
+			<Year>2019</Year>
+			<Month>12</Month>
+			<Day>01</Day>
 		</Date>
 		<ArticleJournal>
 			<Journal idJRef="2" />
