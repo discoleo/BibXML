@@ -7,6 +7,7 @@ public enum BIB_NODES {
 		INSTITUTE("Institution", false, INSTITUTIONS),
 		INSTITUTE_NAME("Name", true, INSTITUTE),
 		INSTITUTE_TYPE("Type", true, INSTITUTE),
+		INSTITUTE_ADRESS("Adress", true, INSTITUTE),
 
 		AFFILIATION("Affiliation", false, AFFILIATIONS_LIST),
 		INSTITUTE_REF("Institution", false, AFFILIATION),
