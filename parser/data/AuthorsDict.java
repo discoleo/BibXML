@@ -46,8 +46,7 @@ public class AuthorsDict extends TreeMap<Integer, AuthorObj> {
 		// add affiliation to Author
 		final AffiliationObj affil = mapAffiliations.get(idAffil);
 		if(affil != null) {
-			final int sz = author.vAffiliations.size() + 1;
-			author.vAffiliations.add("" + sz + ". " + affil.toString());
+			author.vAffiliations.add(affil);
 		}
 	}
 

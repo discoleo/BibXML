@@ -3,11 +3,11 @@ package data;
 import java.util.Vector;
 
 public class AuthorObj {
+	public Integer idAuthor = null;
 	public String sName = null;
 	public String sGivenName = null;
 	
-	// TODO: proper AffilObj
-	public Vector<String> vAffiliations = new Vector<> ();
+	public Vector<AffiliationObj> vAffiliations = new Vector<> ();
 	
 	@Override
 	public String toString() {
@@ -16,8 +16,9 @@ public class AuthorObj {
 		
 		if(vAffiliations.size() > 0) {
 			sb.append('\n');
-			for(final String sAffil : vAffiliations) {
-				sb.append(" ").append(sAffil).append('\n');
+			int count = 1;
+			for(final AffiliationObj affil : vAffiliations) {
+				sb.append(count++).append(".) ").append(affil.toString()).append('\n');
 			}
 		}
 		

@@ -12,6 +12,10 @@ public class AffiliationMap extends TreeMap<Integer, AffiliationObj> {
 	// +++ Institutions
 	private int idInst = -1;
 	
+	public TreeMap<Integer, String> GetInstitutions() {
+		return mapInstitutions;
+	}
+	
 	// +++ Departments +++
 	
 	public void SetID(final int id) {
@@ -50,7 +54,8 @@ public class AffiliationMap extends TreeMap<Integer, AffiliationObj> {
 			mapInstitutions.put(idInst, sInstitution);
 		}
 	}
-	public void PutInstitute(final int idInst, final String sInstitution) {
+	
+	public void PutInstitute(final Integer idInst, final String sInstitution) {
 		mapInstitutions.put(idInst, sInstitution);
 	}
 }

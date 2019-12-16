@@ -18,10 +18,13 @@ public class ArticleObj {
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("Title: ").append(sTitle).append('\n');
+		
+		// Date
 		if(iYear > 0) {
 			sb.append("[").append(iYear).append("]\n");
 		}
 		
+		// Authors
 		int countA = 1;
 		for(final AuthorObj author : vAuthors) {
 			sb.append("Author ").append(countA++).append(": ");
@@ -29,6 +32,8 @@ public class ArticleObj {
 				sb.append(author.toString());
 			}
 		}
+		
+		// Journal
 		sb.append("Journal: ").append(journal.toString());
 		
 		return sb.toString();
