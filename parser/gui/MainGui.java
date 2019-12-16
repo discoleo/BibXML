@@ -9,27 +9,39 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.dom4j.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import data.AffiliationObj;
 import data.ArticleObj;
+import data.AuthorObj;
+import data.GetMapsINTF;
 import dom.Parser;
+import dom.Updater;
 import sax.BibSaxHandler;
 import valid.XmlValidator;
 
 
 public class MainGui {
 	
-	// ++++++++++ version 2.1 +++++++++
+	// ++++++++++ version 3.0-very-pre-alfa +++++++++
 	
-	private final String sPath = "C:\\Users\\Leo Mada\\Desktop\\Practica\\MSc\\XML\\";
+	private final String sPath = "...\\";
 	private final String sXmlFile = "Bib.xml";
+	// do NOT override original
+	private final String sXmlUpdateFile = "Bib.update.xml";
 	private final String sSchemaFile = "Bib.Schema.xsd";
+	
+	private final Parser parserDom = new Parser();
 	
 	// +++ IO +++
 	public File GetFile() {
 		return new File(sPath + sXmlFile);
+	}
+	public File GetUpdateFile() {
+		return new File(sPath + sXmlUpdateFile);
 	}
 	public File GetSchema() {
 		return new File(sPath + sSchemaFile);
@@ -87,13 +99,38 @@ public class MainGui {
 	}
 	
 	// +++ Parse DOM +++
-	public void ParseDom() {
-		this.ParseDom(this.GetFile());
+	public Document ParseDom() {
+		return this.ParseDom(this.GetFile());
 	}
-	public void ParseDom(final File file) {
-		final Parser parserDom = new Parser();
-		parserDom.Parse(file);
+	public Document ParseDom(final File file) {
+		final Document doc = parserDom.Parse(file);
+		//
 		this.Print(parserDom.GetArticles());
+		return doc;
+	}
+	
+	// +++ Update XML +++
+	// TODO: implement more update functions
+	public boolean Update(final Document doc, final GetMapsINTF maps) {
+		return this.Update(doc, maps, this.GetUpdateFile());
+	}
+	public boolean Update(final Document doc, final GetMapsINTF maps, final File fileXML) {
+		final Updater updater = new Updater(doc, maps);
+		// Test
+		final AuthorObj author = new AuthorObj();
+		author.idAuthor = 4;
+		author.sGivenName = "_"; // TODO: escape?
+		author.sName = "_";
+		//
+		final AffiliationObj affiliation = new AffiliationObj();
+		affiliation.sInstitution = "Gottlob Farm";
+		affiliation.sDepartment = "Dept. of Cardiac & Vascular Development in \"Large Mammals\"";
+		affiliation.sType = "Galactic Research Institute for Pigs";
+		affiliation.sAdress = "Branchial Arch 42";
+		//
+		updater.AddAffil(author, affiliation);
+		updater.Write(fileXML);
+		return false; // TODO
 	}
 	
 	// +++ Validate XML +++
@@ -120,7 +157,9 @@ public class MainGui {
 		}
 		
 		// DOM Parser
-		gui.ParseDom();
+		final Document doc = gui.ParseDom();
+		// Update xml file
+		gui.Update(doc, gui.parserDom);
 	}
 
 }
