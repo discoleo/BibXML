@@ -13,11 +13,12 @@ import data.AffiliationMap;
 import data.ArticleObj;
 import data.AuthorObj;
 import data.AuthorsDict;
+import data.GetMapsINTF;
 import data.JournalMap;
 import data.JournalObj;
 
 
-public class Parser {
+public class Parser implements GetMapsINTF {
 	
 	// Affiliations
 	protected static final String sXP_INSTITUTIONS = "/BibManagement/Affiliations/Institutions/Institution";
@@ -41,8 +42,19 @@ public class Parser {
 	public Vector<ArticleObj> GetArticles() {
 		return vArticles;
 	}
+	public AffiliationMap GetAffiliationMap() {
+		return mapAffiliations;
+	}
+	public JournalMap GetJournalMap() {
+		return mapJournals;
+	}
+	public AuthorsDict GetAuthorsDict() {
+		return mapAuthors;
+	}
 	
-	public void Parse(final File file) {
+	// ++++ Parser
+	
+	public Document Parse(final File file) {
 		final SAXReader reader = new SAXReader();
 		try {
 			final Document document = reader.read(file);
@@ -59,8 +71,11 @@ public class Parser {
 			
 			// Articles
 			this.ExtractArticles(document);
+			
+			return document;
 		} catch (DocumentException e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 	
@@ -91,11 +106,12 @@ public class Parser {
 		System.out.println("\nExtracting Authors:");
 		
 		for(final Node nodeAuthor : listAuthors) {
-			final int idAuthor = Integer.parseInt(nodeAuthor.valueOf("@idAuthor"));
+			final Integer idAuthor = Integer.parseInt(nodeAuthor.valueOf("@idAuthor"));
 			final String sName = nodeAuthor.valueOf("Name");
 			final String sGName = nodeAuthor.valueOf("GivenName");
 			
 			final AuthorObj author = new AuthorObj();
+			author.idAuthor = idAuthor; // currently not yet used
 			author.sName = sName;
 			author.sGivenName = sGName;
 			mapAuthors.put(idAuthor, author);
